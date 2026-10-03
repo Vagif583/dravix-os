@@ -1,1 +1,2031 @@
-Мой сайт
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dravix — Windows Archive</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root{
+    --bg:#020203;
+    --bg2:#070709;
+    --glass:rgba(255,255,255,.055);
+    --glass2:rgba(255,255,255,.085);
+    --line:rgba(255,255,255,.12);
+    --line2:rgba(255,255,255,.20);
+    --text:#f7f7f8;
+    --muted:#85858e;
+    --dim:#55555d;
+    --white:#fff;
+    --blue:#6da8ff;
+    --violet:#a77cff;
+    --green:#66e6a8;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+    color:var(--text);
+    font-family:Inter,Arial,sans-serif;
+    background:
+        radial-gradient(circle at 50% -15%,rgba(255,255,255,.12),transparent 30%),
+        radial-gradient(circle at 0% 30%,rgba(72,125,255,.07),transparent 28%),
+        radial-gradient(circle at 100% 60%,rgba(150,90,255,.06),transparent 28%),
+        linear-gradient(180deg,#030304,#020203 60%,#050507);
+}
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.45;
+    background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+    background-size:70px 70px;
+    mask-image:linear-gradient(to bottom,#000 0%,transparent 85%);
+    z-index:-2;
+}
+
+body:after{
+    content:"";
+    position:fixed;
+    width:600px;
+    height:600px;
+    left:50%;
+    top:250px;
+    transform:translateX(-50%);
+    border-radius:50%;
+    background:rgba(255,255,255,.025);
+    filter:blur(120px);
+    pointer-events:none;
+    z-index:-1;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+header{
+    position:fixed;
+    top:15px;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(1180px,92%);
+    height:66px;
+    z-index:1000;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 12px 0 16px;
+
+    border:1px solid rgba(255,255,255,.13);
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.09),
+            rgba(255,255,255,.025)
+        );
+
+    backdrop-filter:blur(28px);
+    -webkit-backdrop-filter:blur(28px);
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.55),
+        inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+    color:white;
+}
+
+.logo-box{
+    width:40px;
+    height:40px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:13px;
+
+    font-size:15px;
+    font-weight:800;
+
+    color:#050505;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #d9d9dd 45%,
+            #696970
+        );
+
+    box-shadow:
+        0 8px 25px rgba(255,255,255,.12),
+        inset 0 1px 1px white,
+        inset 0 -2px 5px rgba(0,0,0,.25);
+}
+
+.logo-name{
+    font-size:16px;
+    font-weight:800;
+    letter-spacing:-.7px;
+}
+
+.logo-name span{
+    color:#777780;
+    font-weight:500;
+}
+
+nav{
+    display:flex;
+    gap:4px;
+}
+
+nav a{
+    color:#9999a2;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:600;
+
+    padding:10px 13px;
+    border-radius:11px;
+
+    transition:.25s;
+}
+
+nav a:hover{
+    color:white;
+    background:rgba(255,255,255,.07);
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero{
+    width:min(1180px,92%);
+    margin:auto;
+    padding-top:170px;
+    text-align:center;
+}
+
+.pill{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+
+    padding:8px 13px;
+
+    border:1px solid rgba(255,255,255,.13);
+    border-radius:999px;
+
+    background:rgba(255,255,255,.035);
+
+    color:#9999a2;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:1px;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.07),
+        0 10px 40px rgba(0,0,0,.25);
+}
+
+.pill-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 15px var(--green);
+}
+
+.hero h1{
+    margin-top:28px;
+
+    font-size:clamp(58px,9vw,108px);
+    line-height:.91;
+    letter-spacing:-7px;
+    font-weight:800;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #eeeeef 35%,
+            #85858d 72%,
+            #39393e 100%
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+
+    filter:drop-shadow(0 20px 35px rgba(0,0,0,.7));
+}
+
+.hero h1 strong{
+    font-weight:800;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #aeb0b8 45%,
+            #55555c
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero-description{
+    max-width:650px;
+    margin:30px auto 0;
+
+    color:#7d7d86;
+    font-size:15px;
+    line-height:1.8;
+}
+
+.hero-buttons{
+    margin-top:32px;
+
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    min-height:48px;
+    padding:0 21px;
+
+    border-radius:14px;
+
+    text-decoration:none;
+    font-size:12px;
+    font-weight:800;
+
+    transition:.3s;
+}
+
+.button-white{
+    color:#050505;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #d9d9dc
+        );
+
+    box-shadow:
+        0 12px 40px rgba(255,255,255,.10),
+        inset 0 1px 1px white;
+}
+
+.button-white:hover{
+    transform:translateY(-3px);
+    box-shadow:
+        0 18px 50px rgba(255,255,255,.18),
+        inset 0 1px 1px white;
+}
+
+.button-glass{
+    color:#ddd;
+
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.12);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+.button-glass:hover{
+    transform:translateY(-3px);
+    background:rgba(255,255,255,.08);
+    border-color:rgba(255,255,255,.22);
+}
+
+/* =========================================
+   PREMIUM WINDOWS
+========================================= */
+
+.window-wrapper{
+    position:relative;
+
+    width:min(970px,100%);
+    margin:75px auto 0;
+
+    perspective:1400px;
+}
+
+.window-glow{
+    position:absolute;
+    left:50%;
+    top:50%;
+
+    width:70%;
+    height:70%;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.13),
+            transparent 65%
+        );
+
+    filter:blur(55px);
+    pointer-events:none;
+}
+
+.window{
+    position:relative;
+
+    min-height:510px;
+
+    overflow:hidden;
+
+    border-radius:25px;
+
+    border:1px solid rgba(255,255,255,.18);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.11),
+            rgba(255,255,255,.025) 40%,
+            rgba(255,255,255,.045)
+        );
+
+    backdrop-filter:blur(35px);
+    -webkit-backdrop-filter:blur(35px);
+
+    box-shadow:
+        0 60px 140px rgba(0,0,0,.85),
+        0 20px 50px rgba(0,0,0,.5),
+        inset 0 1px 0 rgba(255,255,255,.18),
+        inset 0 -1px 0 rgba(255,255,255,.04);
+
+    transform:rotateX(2deg);
+
+    transition:.5s;
+}
+
+.window:hover{
+    transform:rotateX(0deg) translateY(-4px);
+}
+
+.window:before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+        linear-gradient(
+            120deg,
+            rgba(255,255,255,.13),
+            transparent 25%,
+            transparent 70%,
+            rgba(255,255,255,.05)
+        );
+
+    opacity:.7;
+}
+
+.window-top{
+    height:58px;
+
+    display:flex;
+    align-items:center;
+
+    padding:0 20px;
+
+    border-bottom:1px solid rgba(255,255,255,.09);
+
+    background:rgba(0,0,0,.17);
+}
+
+.window-dots{
+    display:flex;
+    gap:8px;
+}
+
+.window-dots i{
+    display:block;
+
+    width:10px;
+    height:10px;
+
+    border-radius:50%;
+
+    background:#777;
+    opacity:.75;
+}
+
+.window-title{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+
+    color:#85858d;
+
+    font-size:11px;
+    font-weight:600;
+}
+
+.window-body{
+    min-height:450px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    position:relative;
+
+    background:
+        radial-gradient(
+            circle at 50% 48%,
+            rgba(255,255,255,.08),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(82,132,255,.07),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(160,100,255,.05),
+            transparent 30%
+        );
+}
+
+.window-body:after{
+    content:"";
+
+    position:absolute;
+    width:420px;
+    height:420px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(255,255,255,.025);
+
+    box-shadow:
+        0 0 0 55px rgba(255,255,255,.012),
+        0 0 0 110px rgba(255,255,255,.008);
+
+    pointer-events:none;
+}
+
+.win-logo{
+    position:relative;
+    z-index:2;
+
+    width:180px;
+    height:180px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:1fr 1fr;
+
+    gap:8px;
+
+    transform:
+        perspective(800px)
+        rotateY(-12deg)
+        rotateX(5deg);
+
+    filter:
+        drop-shadow(0 25px 35px rgba(0,0,0,.6))
+        drop-shadow(0 0 35px rgba(255,255,255,.08));
+}
+
+.win-logo span{
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff 0%,
+            #dedee1 42%,
+            #66666d 100%
+        );
+
+    border-radius:3px;
+
+    box-shadow:
+        inset 1px 1px 1px rgba(255,255,255,.9),
+        inset -2px -3px 6px rgba(0,0,0,.3);
+}
+
+/* =========================================
+   SECTIONS
+========================================= */
+
+.section{
+    width:min(1180px,92%);
+    margin:auto;
+    padding-top:125px;
+}
+
+.section-label{
+    color:#62626a;
+
+    font-size:10px;
+    font-weight:800;
+
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.section h2{
+    margin-top:10px;
+
+    font-size:clamp(34px,5vw,58px);
+
+    letter-spacing:-3px;
+}
+
+.section-description{
+    margin-top:12px;
+
+    color:#6e6e77;
+
+    font-size:13px;
+    line-height:1.7;
+}
+
+/* =========================================
+   CREATOR
+========================================= */
+
+.creator{
+    position:relative;
+
+    display:grid;
+    grid-template-columns:1.3fr .7fr;
+
+    gap:20px;
+
+    margin-top:38px;
+}
+
+.creator-card{
+    position:relative;
+
+    min-height:310px;
+
+    padding:35px;
+
+    overflow:hidden;
+
+    border-radius:27px;
+
+    border:1px solid rgba(255,255,255,.13);
+
+    background:
+        radial-gradient(
+            circle at 90% 10%,
+            rgba(255,255,255,.10),
+            transparent 35%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.07),
+            rgba(255,255,255,.018)
+        );
+
+    box-shadow:
+        0 35px 90px rgba(0,0,0,.6),
+        inset 0 1px 0 rgba(255,255,255,.11);
+}
+
+.creator-card:after{
+    content:"";
+
+    position:absolute;
+
+    width:280px;
+    height:280px;
+
+    right:-130px;
+    bottom:-140px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    box-shadow:
+        0 0 0 40px rgba(255,255,255,.012),
+        0 0 0 80px rgba(255,255,255,.008);
+}
+
+.creator-small{
+    color:#66666e;
+
+    font-size:10px;
+    font-weight:800;
+
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.creator-name{
+    margin-top:55px;
+
+    font-size:clamp(36px,5vw,62px);
+
+    letter-spacing:-3px;
+    font-weight:800;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff,
+            #888890
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.creator-text{
+    margin-top:12px;
+
+    color:#73737c;
+
+    font-size:13px;
+}
+
+.creator-side{
+    min-height:310px;
+
+    padding:30px;
+
+    border-radius:27px;
+
+    border:1px solid rgba(255,255,255,.10);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.05),
+            rgba(255,255,255,.015)
+        );
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.5),
+        inset 0 1px 0 rgba(255,255,255,.07);
+}
+
+.creator-side h3{
+    font-size:17px;
+}
+
+.creator-side p{
+    margin-top:12px;
+
+    color:#71717a;
+
+    font-size:12px;
+    line-height:1.8;
+}
+
+.creator-line{
+    height:1px;
+
+    margin:25px 0;
+
+    background:rgba(255,255,255,.08);
+}
+
+/* =========================================
+   PROJECTS
+========================================= */
+
+.projects{
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:18px;
+
+    margin-top:38px;
+}
+
+.project{
+    position:relative;
+
+    min-height:300px;
+
+    padding:32px;
+
+    overflow:hidden;
+
+    border-radius:25px;
+
+    border:1px solid rgba(255,255,255,.11);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.065),
+            rgba(255,255,255,.018)
+        );
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.55),
+        inset 0 1px 0 rgba(255,255,255,.08);
+
+    transition:.35s;
+}
+
+.project:hover{
+    transform:translateY(-7px);
+
+    border-color:rgba(255,255,255,.19);
+
+    box-shadow:
+        0 45px 100px rgba(0,0,0,.7),
+        inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+.project-number{
+    color:#55555d;
+
+    font-size:10px;
+    font-weight:800;
+
+    letter-spacing:2px;
+}
+
+.project h3{
+    margin-top:45px;
+
+    font-size:31px;
+    letter-spacing:-1.5px;
+}
+
+.project p{
+    margin-top:13px;
+
+    max-width:500px;
+
+    color:#73737c;
+
+    font-size:12px;
+    line-height:1.8;
+}
+
+.project-status{
+    display:inline-flex;
+
+    margin-top:27px;
+
+    padding:7px 10px;
+
+    border-radius:999px;
+
+    color:#9b9ba4;
+
+    font-size:9px;
+    font-weight:800;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    background:rgba(255,255,255,.035);
+}
+
+/* =========================================
+   WINDOWS CARDS
+========================================= */
+
+.search{
+    width:100%;
+    height:55px;
+
+    margin-top:35px;
+
+    padding:0 18px;
+
+    border-radius:15px;
+
+    border:1px solid rgba(255,255,255,.10);
+
+    outline:none;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.018)
+        );
+
+    color:white;
+
+    font-family:inherit;
+    font-size:12px;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.06);
+
+    transition:.25s;
+}
+
+.search::placeholder{
+    color:#55555d;
+}
+
+.search:focus{
+    border-color:rgba(255,255,255,.22);
+
+    box-shadow:
+        0 0 0 4px rgba(255,255,255,.025),
+        inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.windows-grid{
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:16px;
+
+    margin-top:18px;
+}
+
+.windows-card{
+    position:relative;
+
+    min-height:260px;
+
+    padding:24px;
+
+    overflow:hidden;
+
+    border-radius:22px;
+
+    border:1px solid rgba(255,255,255,.10);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.065),
+            rgba(255,255,255,.015)
+        );
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.5),
+        inset 0 1px 0 rgba(255,255,255,.07);
+
+    transition:.35s;
+}
+
+.windows-card:before{
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    right:-100px;
+    top:-100px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.055);
+
+    filter:blur(25px);
+}
+
+.windows-card:hover{
+    transform:translateY(-6px) scale(1.01);
+
+    border-color:rgba(255,255,255,.18);
+
+    box-shadow:
+        0 35px 85px rgba(0,0,0,.7),
+        inset 0 1px 0 rgba(255,255,255,.11);
+}
+
+.card-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.os-icon{
+    width:37px;
+    height:37px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:11px;
+
+    color:#050505;
+
+    font-size:10px;
+    font-weight:900;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff,
+            #999
+        );
+
+    box-shadow:
+        0 8px 25px rgba(255,255,255,.08),
+        inset 0 1px 1px white;
+}
+
+.version{
+    color:#606068;
+
+    font-size:10px;
+    font-weight:800;
+
+    letter-spacing:1px;
+}
+
+.windows-card h3{
+    margin-top:36px;
+
+    font-size:21px;
+    letter-spacing:-1px;
+}
+
+.windows-card p{
+    margin-top:7px;
+
+    color:#686871;
+
+    font-size:11px;
+}
+
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+
+    gap:5px;
+
+    margin-top:17px;
+}
+
+.tag{
+    padding:6px 8px;
+
+    border-radius:7px;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    background:rgba(255,255,255,.035);
+
+    color:#7f7f88;
+
+    font-size:8px;
+    font-weight:800;
+}
+
+.card-button{
+    display:block;
+
+    margin-top:19px;
+
+    padding:11px;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    border-radius:10px;
+
+    color:#050505;
+
+    font-size:10px;
+    font-weight:900;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff,
+            #d4d4d7
+        );
+
+    box-shadow:
+        0 8px 25px rgba(255,255,255,.07),
+        inset 0 1px 1px white;
+
+    transition:.25s;
+}
+
+.card-button:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 12px 35px rgba(255,255,255,.15),
+        inset 0 1px 1px white;
+}
+
+/* =========================================
+   HELP
+========================================= */
+
+.help-grid{
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:18px;
+
+    margin-top:38px;
+}
+
+.help-card{
+    padding:30px;
+
+    min-height:180px;
+
+    border-radius:22px;
+
+    border:1px solid rgba(255,255,255,.09);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.05),
+            rgba(255,255,255,.015)
+        );
+
+    box-shadow:
+        0 25px 65px rgba(0,0,0,.45),
+        inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+.help-card h3{
+    font-size:17px;
+}
+
+.help-card p{
+    margin-top:12px;
+
+    color:#707079;
+
+    font-size:12px;
+    line-height:1.8;
+}
+
+/* =========================================
+   CONTACT
+========================================= */
+
+.contact{
+    position:relative;
+
+    overflow:hidden;
+
+    margin-top:38px;
+
+    padding:60px;
+
+    border-radius:30px;
+
+    border:1px solid rgba(255,255,255,.14);
+
+    background:
+        radial-gradient(
+            circle at 90% 15%,
+            rgba(255,255,255,.11),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 10% 90%,
+            rgba(90,130,255,.05),
+            transparent 30%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.07),
+            rgba(255,255,255,.018)
+        );
+
+    box-shadow:
+        0 45px 110px rgba(0,0,0,.65),
+        inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.contact h2{
+    margin-top:12px;
+
+    font-size:clamp(35px,5vw,60px);
+
+    letter-spacing:-3px;
+}
+
+.contact p{
+    max-width:600px;
+
+    margin-top:13px;
+
+    color:#707079;
+
+    font-size:13px;
+    line-height:1.8;
+}
+
+.contact-buttons{
+    display:flex;
+
+    gap:10px;
+
+    margin-top:28px;
+
+    flex-wrap:wrap;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer{
+    width:min(1180px,92%);
+
+    margin:100px auto 0;
+
+    padding:28px 0 35px;
+
+    border-top:1px solid rgba(255,255,255,.07);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    color:#505058;
+
+    font-size:10px;
+}
+
+footer strong{
+    color:#898991;
+}
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.hero{
+    animation:fadeUp .9s ease both;
+}
+
+.window-wrapper{
+    animation:fadeUp 1s .15s ease both;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:850px){
+
+    header{
+        top:9px;
+        width:94%;
+    }
+
+    nav{
+        display:none;
+    }
+
+    .hero{
+        padding-top:135px;
+    }
+
+    .hero h1{
+        letter-spacing:-4px;
+    }
+
+    .window{
+        min-height:390px;
+    }
+
+    .window-body{
+        min-height:330px;
+    }
+
+    .win-logo{
+        width:120px;
+        height:120px;
+    }
+
+    .creator{
+        grid-template-columns:1fr;
+    }
+
+    .projects{
+        grid-template-columns:1fr;
+    }
+
+    .windows-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .help-grid{
+        grid-template-columns:1fr;
+    }
+
+    .contact{
+        padding:40px 27px;
+    }
+}
+
+@media(max-width:560px){
+
+    .hero{
+        width:92%;
+    }
+
+    .section{
+        width:92%;
+    }
+
+    .hero h1{
+        font-size:51px;
+        letter-spacing:-3px;
+    }
+
+    .hero-description{
+        font-size:13px;
+    }
+
+    .window-wrapper{
+        margin-top:55px;
+    }
+
+    .window{
+        border-radius:19px;
+    }
+
+    .window-body{
+        min-height:280px;
+    }
+
+    .window-body:after{
+        width:260px;
+        height:260px;
+    }
+
+    .win-logo{
+        width:90px;
+        height:90px;
+        gap:5px;
+    }
+
+    .windows-grid{
+        grid-template-columns:1fr;
+    }
+
+    .creator-card,
+    .creator-side{
+        min-height:auto;
+    }
+
+    .creator-name{
+        margin-top:40px;
+    }
+
+    footer{
+        flex-direction:column;
+        gap:10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header>
+
+    <a href="#" class="logo">
+
+        <div class="logo-box">
+            D
+        </div>
+
+        <div class="logo-name">
+            DRAVIX <span>Archive</span>
+        </div>
+
+    </a>
+
+    <nav>
+        <a href="#creator">Создатель</a>
+        <a href="#projects">Разработки</a>
+        <a href="#windows11">Windows 11</a>
+        <a href="#windows10">Windows 10</a>
+        <a href="#contact">Контакт</a>
+    </nav>
+
+</header>
+
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<section class="hero">
+
+    <div class="pill">
+        <span class="pill-dot"></span>
+        DRAVIX WINDOWS ARCHIVE
+    </div>
+
+    <h1>
+        Windows.<br>
+        <strong>В новом измерении.</strong>
+    </h1>
+
+    <p class="hero-description">
+        Премиальный архив Windows, собственные проекты Dravix
+        и тщательно собранная коллекция версий.
+    </p>
+
+    <div class="hero-buttons">
+
+        <a href="#windows11" class="button button-white">
+            Открыть архив
+        </a>
+
+        <a href="#projects" class="button button-glass">
+            Мои разработки
+        </a>
+
+    </div>
+
+
+    <!-- PREMIUM WINDOW -->
+
+    <div class="window-wrapper">
+
+        <div class="window-glow"></div>
+
+        <div class="window">
+
+            <div class="window-top">
+
+                <div class="window-dots">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </div>
+
+                <div class="window-title">
+                    DRAVIX • WINDOWS ARCHIVE
+                </div>
+
+            </div>
+
+
+            <div class="window-body">
+
+                <div class="win-logo">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     CREATOR
+========================================= -->
+
+<section class="section" id="creator">
+
+    <div class="section-label">
+        ABOUT DRAVIX
+    </div>
+
+    <h2>Создатель</h2>
+
+    <p class="section-description">
+        Человек, который создаёт и развивает проект Dravix.
+    </p>
+
+
+    <div class="creator">
+
+        <div class="creator-card">
+
+            <div class="creator-small">
+                CREATOR
+            </div>
+
+            <div class="creator-name">
+                VagifMusaev
+            </div>
+
+            <div class="creator-text">
+                Автор и создатель проекта Dravix.
+            </div>
+
+        </div>
+
+
+        <div class="creator-side">
+
+            <h3>Dravix</h3>
+
+            <p>
+                Проект объединяет архив Windows,
+                собственные разработки и будущие проекты
+                автора.
+            </p>
+
+            <div class="creator-line"></div>
+
+            <p>
+                Сайт развивается вместе с проектом.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     PROJECTS
+========================================= -->
+
+<section class="section" id="projects">
+
+    <div class="section-label">
+        DRAVIX LAB
+    </div>
+
+    <h2>Мои разработки</h2>
+
+    <p class="section-description">
+        Собственные проекты VagifMusaev.
+    </p>
+
+
+    <div class="projects">
+
+        <article class="project">
+
+            <div class="project-number">
+                PROJECT 01
+            </div>
+
+            <h3>Dravix Lite</h3>
+
+            <p>
+                Лёгкая версия Dravix с акцентом
+                на скорость, простоту и удобство.
+            </p>
+
+            <div class="project-status">
+                В РАЗРАБОТКЕ
+            </div>
+
+        </article>
+
+
+        <article class="project">
+
+            <div class="project-number">
+                PROJECT 02
+            </div>
+
+            <h3>Dravix Pro</h3>
+
+            <p>
+                Расширенная версия Dravix
+                с дополнительными возможностями.
+            </p>
+
+            <div class="project-status">
+                В РАЗРАБОТКЕ
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     WINDOWS 11
+========================================= -->
+
+<section class="section" id="windows11">
+
+    <div class="section-label">
+        WINDOWS ARCHIVE
+    </div>
+
+    <h2>Windows 11</h2>
+
+    <p class="section-description">
+        Современные и архивные версии Windows 11 (RU).
+    </p>
+
+
+    <input
+        class="search"
+        id="search11"
+        type="search"
+        placeholder="Поиск Windows 11..."
+    >
+
+
+    <div class="windows-grid" id="grid11">
+
+        <article class="windows-card" data-name="Windows 11 26H2">
+
+            <div class="card-header">
+                <div class="os-icon">11</div>
+                <div class="version">26H2</div>
+            </div>
+
+            <h3>Windows 11</h3>
+            <p>2026 Update (Официальный релиз)</p>
+
+            <div class="tags">
+                <span class="tag">x64</span>
+                <span class="tag">RU</span>
+                <span class="tag">MICROSOFT</span>
+            </div>
+
+            <a
+                class="card-button"
+                href="https://www.microsoft.com/software-download/windows11"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                ОТКРЫТЬ
+            </a>
+
+        </article>
+
+
+        <article class="windows-card" data-name="Windows 11 25H2">
+
+            <div class="card-header">
+                <div class="os-icon">11</div>
+                <div class="version">25H2</div>
+            </div>
+
+            <h3>Windows 11</h3>
+            <p>25H2 (Официальный сайт)</p>
+
+            <div class="tags">
+                <span class="tag">x64</span>
+                <span class="tag">RU</span>
+                <span class="tag">MICROSOFT</span>
+            </div>
+
+            <a
+                class="card-button"
+                href="https://www.microsoft.com/software-download/windows11"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                ОТКРЫТЬ
+            </a>
+
+        </article>
+
+
+        <article class="windows-card" data-name="Windows 11 24H2">
+
+            <div class="card-header">
+                <div class="os-icon">11</div>
+                <div class="version">24H2</div>
+            </div>
+
+            <h3>Windows 11</h3>
+            <p>24H2 Archive.org (Russian)</p>
+
+            <div class="tags">
+                <span class="tag">x64</span>
+                <span class="tag">RU</span>
+                <span class="tag">ARCHIVE.ORG</span>
+            </div>
+
+            <a
+                class="card-button"
+                href="https://archive.org/search?query=Windows+11+24H2+Russian+ISO"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                ОТКРЫТЬ
+            </a>
+
+        </article>
+
+
+        <article class="windows-card" data-name="Windows 11 23H2">
+
+            <div class="card-header">
+                <div class="os-icon">11</div>
+                <div class="version">23H2</div>
+            </div>
+
+            <h3>Windows 11</h3>
+            <p>23H2 Archive.org (Russian)</p>
+
+            <div class="tags">
+                <span class="tag">x64</span>
+                <span class="tag">RU</span>
+                <span class="tag">ARCHIVE.ORG</span>
+            </div>
+
+            <a
+                class="card-button"
+                href="https://archive.org/search?query=Windows+11+23H2+Russian+ISO"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                ОТКРЫТЬ
+            </a>
+
+        </article>
+
+
+        <article class="windows-card" data-name="Windows 11 22H2">
+
+            <div class="card-header">
+                <div class="os-icon">11</div>
+                <div class="version">22H2</div>
+            </div>
+
+            <h3>Windows 11</h3>
+            <p>22H2 Archive.org (Russian)</p>
+
+            <div class="tags">
+                <span class="tag">x64</span>
+                <span class="tag">RU</span>
+                <span class="tag">ARCHIVE.ORG</span>
+            </div>
+
+            <a
+                class="card-button"
+                href="https://archive.org/search?query=Windows+11+22H2+Russian+ISO"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                ОТКРЫТЬ
+            </a>
+
+        </article>
+
+
+        <article class="windows-card" data-name="Windows 11 21H2">
+
+            <div class="card-header">
+                <div class="os-icon">11</div>
+                <div class="version">21H2</div>
+            </div>
+
+            <h3>Windows 11</h3>
+            <p>21H2 Archive.org (Russian)</p>
+
+            <div class="tags">
+                <span class="tag">x64</span>
+                <span class="tag">RU</span>
+                <span class="tag">ARCHIVE.ORG</span>
+            </div>
+
+            <a
+                class="card-button"
+                href="https://archive.org/search?query=Windows+11+21H2+Russian+ISO"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                ОТКРЫТЬ
+            </a>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     WINDOWS 10
+========================================= -->
+
+<section class="section" id="windows10">
+
+    <div class="section-label">
+        LEGACY ARCHIVE
+    </div>
+
+    <h2>Windows 10</h2>
+
+    <p class="section-description">
+        Архив предыдущих поколений Windows 10 (RU).
+    </p>
+
+
+    <input
+        class="search"
+        id="search10"
+        type="search"
+        placeholder="Поиск Windows 10..."
+    >
+
+
+    <div class="windows-grid" id="grid10">
+
+        <article class="windows-card" data-name="Windows 10 22H2">
+
+            <div class="card-header">
+                <div class="os-icon">10</div>
+                <div class="version">22H2</div>
+            </div>
+
+            <h3>Windows 10</h3>
+            <p>22H2 (Официальный сайт)</p>
+
+            <div class="tags">
+                <span class="tag">x64</span>
+                <span class="tag">x86</span>
+                <span class="tag">RU</span>
+                <span class="tag">MICROSOFT</span>
+            </div>
+
+            <a
+                class="card-button"
+                href="https://www.microsoft.com/software-download/windows10"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                ОТКРЫТЬ
+            </a>
+
+        </article>
+
+
+        <article class="windows-card" data-name="Windows 10 21H2">
+
+            <div class="card-header">
+                <div class="os-icon">10</div>
+                <div class="version">21H2</div>
+            </div>
+
+            <h3>Windows 10</h3>
+            <p>21H2 Archive.org (Russian)</p>
+
+            <div class="tags">
+                <span class="tag">x64</span>
+                <span class="tag">x86</span>
+                <span class="tag">RU</span>
+                <span class="tag">ARCHIVE.ORG</span>
+            </div>
+
+            <a
+                class="card-button"
+                href="https://archive.org/search?query=Windows+10+21H2+Russian+ISO"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                ОТКРЫТЬ
+            </a>
+
+        </article>
+
+
+        <article class="windows-card" data-name="Windows 10 1809 LTSC">
+
+            <div class="card-header">
+                <div class="os-icon">10</div>
+                <div class="version">1809</div>
+            </div>
+
+            <h3>Windows 10</h3>
+            <p>1809 LTSC Archive.org (Russian)</p>
+
+            <div class="tags">
+                <span class="tag">x64</span>
+                <span class="tag">x86</span>
+                <span class="tag">RU</span>
+                <span class="tag">ARCHIVE.ORG</span>
+            </div>
+
+            <a
+                class="card-button"
+                href="https://archive.org/search?query=Windows+10+1809+LTSC+Russian+ISO"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                ОТКРЫТЬ
+            </a>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     HELP / FAQ
+========================================= -->
+
+<section class="section" id="help">
+
+    <div class="section-label">
+        INFORMATION
+    </div>
+
+    <h2>Справка и FAQ</h2>
+
+    <p class="section-description">
+        Ответы на частые вопросы по работе с архивом.
+    </p>
+
+
+    <div class="help-grid">
+
+        <div class="help-card">
+            <h3>Как скачать нужный образ?</h3>
+            <p>
+                Нажмите кнопку «ОТКРЫТЬ» на карточке нужной версии. Актуальные релизы перенаправят вас на официальный сайт Microsoft, а архивные русскоязычные сборки — на доверенный веб-архив Archive.org.
+            </p>
+        </div>
+
+        <div class="help-card">
+            <h3>Что такое Dravix Lite и Pro?</h3>
+            <p>
+                Это авторские модификации и инструменты оптимизации Windows, разрабатываемые VagifMusaev для повышения производительности системы.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     CONTACT
+========================================= -->
+
+<section class="section" id="contact">
+
+    <div class="contact">
+
+        <div class="section-label">
+            GET IN TOUCH
+        </div>
+
+        <h2>Связаться с автором</h2>
+
+        <p>
+            По вопросам сотрудничества, предложениям по развитию архива или отзывам о проектах Dravix.
+        </p>
+
+        <div class="contact-buttons">
+
+            <a href="https://github.com/VagifMusaev" target="_blank" rel="noopener noreferrer" class="button button-white">
+                GitHub VagifMusaev
+            </a>
+
+            <a href="mailto:contact@dravix.archive" class="button button-glass">
+                Написать письмо
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    <div>
+        <strong>DRAVIX Archive</strong> © 2026. Все права защищены.
+    </div>
+
+    <div>
+        Created by <strong>VagifMusaev</strong>
+    </div>
+
+</footer>
+
+
+<!-- =========================================
+     SEARCH SCRIPT
+========================================= -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    function setupSearch(inputId, gridId) {
+        const searchInput = document.getElementById(inputId);
+        const grid = document.getElementById(gridId);
+        
+        if (!searchInput || !grid) return;
+
+        const cards = grid.querySelectorAll('.windows-card');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+
+            cards.forEach(card => {
+                const name = (card.getAttribute('data-name') || '').toLowerCase();
+                const text = card.textContent.toLowerCase();
+
+                if (name.includes(query) || text.includes(query)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    }
+
+    setupSearch('search11', 'grid11');
+    setupSearch('search10', 'grid10');
+});
+</script>
+
+</body>
+</html>
